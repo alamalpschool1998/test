@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>يا رمز العطاء والصمود | لعبة تعليمية | مدرسة الأمل</title>
+  <meta name="description" content="لعبة تعليمية تفاعلية لدرس يا رمز العطاء والصمود - مدرسة الأمل - المعلمة ميسون مطر">
+  <meta property="og:title" content="لعبة يا رمز العطاء والصمود | مدرسة الأمل">
+  <meta property="og:description" content="لعبة تعليمية تفاعلية من إعداد المعلمة ميسون مطر - مدرسة الأمل">
+  <meta property="og:type" content="website">
+<style>
+:root{
+  --bg:#f3f8f2; --card:#ffffff; --primary:#397a4a; --primary2:#65a86f;
+  --gold:#e6b94d; --text:#24352a; --muted:#66756b; --danger:#c94c4c;
+  --ok:#328657; --line:#dbe8dc;
+}
+*{box-sizing:border-box}
+body{
+  margin:0; font-family:"Tahoma","Arial",sans-serif; color:var(--text);
+  background:linear-gradient(135deg,#eef8f0 0%,#fdf9ee 100%);
+  min-height:100vh;
+}
+.app{max-width:900px;margin:auto;padding:18px}
+.top{
+  display:flex;justify-content:space-between;align-items:center;gap:12px;
+  padding:12px 16px;background:#ffffffd9;border:1px solid var(--line);
+  border-radius:18px;box-shadow:0 8px 25px #2d583115;position:sticky;top:8px;z-index:5
+}
+.brand{font-weight:800;color:var(--primary);font-size:18px}\n.credit{font-size:13px;color:var(--muted);font-weight:700;margin-top:3px}\n.shareBtn{background:#eef4ff;color:#2455a4;border:1px solid #cbd9f5}\n.schoolFooter{text-align:center;color:var(--muted);font-weight:800;margin:18px 0 4px;line-height:1.8}\n.shareHint{text-align:center;color:var(--muted);font-size:13px;margin-top:8px}
+.points{background:#fff7d9;color:#765817;padding:9px 13px;border-radius:14px;font-weight:800}
+.screen{margin-top:18px}
+.card{
+  background:var(--card);border:1px solid var(--line);border-radius:28px;
+  padding:26px;box-shadow:0 14px 35px #2d58311a
+}
+.welcome{text-align:center;padding:34px 22px}
+.olive{font-size:64px;margin-bottom:8px}
+h1{color:var(--primary);margin:8px 0 12px;font-size:34px}
+h2{margin:0 0 10px;color:var(--primary);font-size:27px}
+.subtitle{color:var(--muted);line-height:1.8;font-size:17px}
+.nameBox{max-width:500px;margin:24px auto 0;text-align:right}
+label{font-weight:800;display:block;margin-bottom:8px}
+input{
+  width:100%;padding:15px;border:2px solid #cfe0d1;border-radius:15px;
+  font-size:18px;outline:none;background:#fbfefb
+}
+input:focus{border-color:var(--primary2)}
+button{
+  border:0;border-radius:15px;padding:14px 20px;font-size:17px;font-weight:800;
+  cursor:pointer;transition:.18s transform,.18s box-shadow,.18s opacity;
+  font-family:inherit
+}
+button:hover{transform:translateY(-2px);box-shadow:0 7px 16px #28562d1f}
+button:disabled{cursor:not-allowed;opacity:.58;transform:none;box-shadow:none}
+.primary{background:var(--primary);color:white;width:100%;margin-top:14px}
+.secondary{background:#edf5ee;color:var(--primary)}
+.progressWrap{margin:20px 0 10px}
+.progressInfo{display:flex;justify-content:space-between;font-weight:800;color:var(--muted);font-size:14px}
+.progress{height:12px;background:#e6eee6;border-radius:99px;overflow:hidden;margin-top:7px}
+.bar{height:100%;background:linear-gradient(90deg,var(--primary2),var(--gold));width:0;transition:width .35s}
+.questionTag{display:inline-block;background:#eef7ef;color:var(--primary);padding:7px 12px;border-radius:12px;font-weight:800;margin-bottom:13px}
+.question{font-size:25px;line-height:1.6;font-weight:800;margin-bottom:20px}
+.options{display:grid;gap:12px}
+.option{
+  text-align:right;background:#fbfdfb;border:2px solid #d8e6d9;color:var(--text);
+  min-height:56px
+}
+.option.selected{border-color:var(--primary);background:#eef7ef}
+.option.correct{border-color:var(--ok);background:#e9f7ee}
+.option.wrong{border-color:var(--danger);background:#fff0f0}
+.feedback{
+  margin-top:17px;padding:15px;border-radius:16px;font-weight:800;line-height:1.7
+}
+.feedback.ok{background:#e9f7ee;color:#21643b;border:1px solid #b9dfc4}
+.feedback.no{background:#fff0f0;color:#963d3d;border:1px solid #efc0c0}
+.nextRow{display:flex;justify-content:flex-start;margin-top:15px}
+.next{background:var(--primary);color:white;min-width:170px}
+.fill input{margin-top:6px}
+.tf{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.tf button{text-align:center}
+.result{text-align:center}
+.scoreCircle{
+  width:155px;height:155px;border-radius:50%;margin:15px auto;
+  display:grid;place-items:center;background:linear-gradient(145deg,#fff8dc,#edf7ee);
+  border:8px solid #e0c267;box-shadow:inset 0 0 0 8px white
+}
+.scoreCircle strong{font-size:34px;color:var(--primary)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:20px 0}
+.stat{padding:15px;border-radius:16px;background:#f5f9f5;border:1px solid var(--line)}
+.stat b{display:block;font-size:25px;color:var(--primary)}
+.message{font-size:20px;font-weight:800;margin:15px 0 22px}
+.certificate{
+  margin:25px auto 0;max-width:720px;padding:35px;border:8px double #caa847;
+  background:linear-gradient(145deg,#fffdf4,#f2f8f1);position:relative
+}
+.certificate:before,.certificate:after{content:"✦";position:absolute;color:#caa847;font-size:28px}
+.certificate:before{top:12px;right:18px}.certificate:after{bottom:12px;left:18px}
+.certTitle{font-size:31px;color:#8a6a1d;font-weight:900}
+.certName{font-size:29px;color:var(--primary);font-weight:900;margin:18px 0}
+.certLine{font-size:17px;line-height:2}
+.actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:18px}
+.small{font-size:13px;color:var(--muted);margin-top:16px}
+@media(max-width:600px){
+ .app{padding:10px}.card{padding:18px;border-radius:22px}
+ h1{font-size:28px}.question{font-size:21px}.stats{grid-template-columns:1fr}
+ .tf{grid-template-columns:1fr}.top{position:static}
+}
+@media print{
+ body{background:white}.top,.actions,.small{display:none!important}
+ .app{max-width:100%}.screen{margin:0}.certificate{display:block!important;box-shadow:none}
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="top">
+    <div><div class="brand">🌿 يا رمز العطاء والصمود</div><div class="credit">مدرسة الأمل • المعلمة ميسون مطر</div></div>
+    <div class="points" id="points">النقاط: 0 ⭐</div>
+  </div>
+  <div id="screen" class="screen"></div>
+</div>
+
+<script>
+const questions = [
+ {type:"mc", q:"أين كان الطالب يجلس عندما يكون متعبًا؟",
+  options:["تحت شجرة الزيتون في فناء بيتنا","إلى جانب البحر","في المدرسة","في السوق"], a:0},
+ {type:"mc", q:"ماذا كان يشعر الطالب بعد الجلوس تحت شجرة الزيتون؟",
+  options:["بالخوف","بالراحة بعد التعب","بالجوع فقط","بالبرد"], a:1},
+ {type:"mc", q:"ماذا كانت شجرة الزيتون تذكّر الطالب به؟",
+  options:["بألعاب الأطفال","بحكايات عن الأجداد القدماء وزراعة الزيتون","برحلات إلى المدن","بالمدفأة فقط"], a:1},
+ {type:"tf", q:"غرس الأجداد شجرة الزيتون قبل مئات السنين.",
+  options:["صح","خطأ"], a:0},
+ {type:"mc", q:"ماذا فعل الأجداد بالزيتون بعد أن غرسوه؟",
+  options:["تركوه بلا عناية","اعتنوا به وسقوه من حبات عرقهم","قطعوا أخشابه فقط","باعوا ثماره"], a:1},
+ {type:"mc", q:"ما الفكرة الرئيسة للنص؟",
+  options:["وصف طعام شهي فقط","بيان عطاء شجرة الزيتون وأهميتها ورمزيتها","وصف فصل الشتاء","الحديث عن أنواع الصابون"], a:1},
+ {type:"mc", q:"ما معنى كلمة «يأبى» في عبارة «شعب يأبى إلا أن يحافظ»؟",
+  options:["يرفض","يحب","ينسى","يبدأ"], a:0},
+ {type:"mc", q:"ما ضد كلمة «الخضراء» الوارد في النص من حيث اللون؟",
+  options:["المباركة","السوداء","القديمة","الطيبة"], a:1},
+ {type:"fill", q:"أكمل من النص: «وعندما أجوع أذهب إلى مائدة ________».",
+  answer:"طعامي"},
+ {type:"mc", q:"ماذا كانت ثمار الزيتون الخضراء والسوداء تفعل للطالب؟",
+  options:["تفتح شهيته للأكل","تجعله يشعر بالبرد","تمنعه من النوم","تجعله يذهب إلى المدرسة"], a:0},
+ {type:"tf", q:"زيت الزيتون في النص وُصف بأنه أطيب غذاء.",
+  options:["صح","خطأ"], a:0},
+ {type:"mc", q:"عندما يشتد البرد، إلى ماذا يجلس الطالب؟",
+  options:["إلى مائدة طعامه","إلى مدفأته","تحت الشجرة","إلى البحر"], a:1},
+ {type:"mc", q:"من ماذا اشتعلت المدفأة في النص؟",
+  options:["من أخشاب شجرة الزيتون وبقايا ثمارها بعد عصرها","من أوراق الكتب","من الحجارة فقط","من الماء"], a:0},
+ {type:"tf", q:"أحس الطالب بالدفء يسري في جميع أنحاء جسمه.",
+  options:["صح","خطأ"], a:0},
+ {type:"mc", q:"ماذا يستخدم الطالب عندما يذهب لينظف بدنه؟",
+  options:["صابونًا صنع من زيت الزيتون","ماء البحر","خشبًا","ثمارًا خضراء"], a:0},
+ {type:"fill", q:"أكمل: «من أجود أنواع ________».",
+  answer:"الصابون"},
+ {type:"mc", q:"إلى ماذا ترمز شجرة الزيتون في نهاية النص؟",
+  options:["إلى اللعب والمرح","إلى العطاء والصمود","إلى السفر والرحلات","إلى الشتاء والبرد"], a:1},
+ {type:"mc", q:"أي ترتيب يطابق فوائد شجرة الزيتون المذكورة في النص؟",
+  options:["الراحة، الغذاء، التدفئة، الصابون","المدرسة، السفر، اللعب، النوم","البحر، الطعام، المدرسة، السفر","الصابون، البحر، اللعب، المدرسة"], a:0},
+ {type:"mc", q:"أي عبارة تدل على صمود الشعب في النص؟",
+  options:["ثمارها الخضراء والسوداء","شعب يأبى إلا أن يحافظ على زيتونته المباركة","أذهب إلى مائدة طعامي","أحس بالدفء"], a:1},
+ {type:"mc", q:"مراجعة شاملة: لماذا خاطب الكاتب شجرة الزيتون بقوله «أيتها الشجرة المباركة»؟",
+  options:["لأنها تمنحه الراحة والغذاء والدفء والصابون، وترمز إلى العطاء والصمود","لأنها شجرة صغيرة لا ثمار لها","لأنها تنمو داخل المدرسة","لأنها لا تحتاج إلى عناية"], a:0}
+];
+
+let name="", idx=0, score=0, answered=false;
+
+function renderWelcome(){
+ document.getElementById("screen").innerHTML = `
+ <div class="card welcome">
+   <div class="olive">🫒🌿</div>
+   <h1>لعبة يا رمز العطاء والصمود</h1>
+   <div class="subtitle">
+     رحلة تفاعلية مع شجرة الزيتون في نص «يا رمز العطاء والصمود».<br>
+     أجب عن <b>20 سؤالًا</b>، واجمع النقاط، ثم احصل على شهادة إنجاز إذا حققت 50% فأكثر.<br><b style="color:var(--primary)">مدرسة الأمل — المعلمة ميسون مطر</b>
+   </div>
+   <div class="nameBox">
+     <label for="studentName">اكتب اسم الطالب/الطالبة <span style="color:#c94c4c">*</span></label>
+     <input id="studentName" maxlength="50" placeholder="اكتب اسمك هنا..." autocomplete="off">
+     <button class="primary" onclick="startGame()">🌱 ابدأ اللعبة</button>
+   </div>
+   <div class="small">كل سؤال = نقطة واحدة • محاولة واحدة فقط لكل سؤال</div>
+ </div>`;
+}
+function startGame(){
+ const v=document.getElementById("studentName").value.trim();
+ if(!v){alert("يرجى كتابة اسم الطالب أولًا للبدء.");return;}
+ name=v; idx=0; score=0; answered=false; updatePoints(); renderQuestion();
+}
+function updatePoints(){document.getElementById("points").textContent=`النقاط: ${score} ⭐`;}
+function renderQuestion(){
+ answered=false;
+ const q=questions[idx], pct=(idx/20)*100;
+ let content=`<div class="card">
+  <div class="progressWrap">
+   <div class="progressInfo"><span>السؤال ${idx+1} من 20</span><span>${Math.round(pct)}%</span></div>
+   <div class="progress"><div class="bar" style="width:${pct}%"></div></div>
+  </div>
+  <div class="questionTag">🌿 تحدّي ${idx+1}</div>
+  <div class="question">${q.q}</div>`;
+ if(q.type==="fill"){
+   content+=`<div class="fill"><input id="fillAnswer" placeholder="اكتب الإجابة هنا..." autocomplete="off"></div>`;
+ }else{
+   content+=`<div class="${q.type==="tf"?"tf":"options"}">`;
+   q.options.forEach((o,i)=>content+=`<button class="option" id="opt${i}" onclick="selectOption(${i})">${o}</button>`);
+   content+=`</div>`;
+ }
+ content+=`<div class="nextRow"><button class="next" id="submitBtn" onclick="submitAnswer()">إجابة</button></div>
+ <div id="feedback"></div></div>`;
+ document.getElementById("screen").innerHTML=content;
+ if(q.type==="fill") document.getElementById("fillAnswer").focus();
+}
+let selected=null;
+function selectOption(i){
+ if(answered)return;
+ selected=i;
+ document.querySelectorAll(".option").forEach((b,j)=>b.classList.toggle("selected",j===i));
+}
+function normalize(s){
+ return s.trim().replace(/[ًٌٍَُِّْـ]/g,"").replace(/[أإآ]/g,"ا").replace(/ى/g,"ي").replace(/\s+/g," ");
+}
+function submitAnswer(){
+ if(answered)return;
+ const q=questions[idx];
+ let correct=false;
+ if(q.type==="fill"){
+   const el=document.getElementById("fillAnswer");
+   if(!el.value.trim()){alert("اختر/اكتب إجابتك أولًا.");return;}
+   correct=normalize(el.value)===normalize(q.answer);
+ }else{
+   if(selected===null){alert("اختر إجابة أولًا.");return;}
+   correct=selected===q.a;
+ }
+ answered=true;
+ if(correct) score++;
+ updatePoints();
+ if(q.type!=="fill"){
+   document.querySelectorAll(".option").forEach((b,j)=>{
+     b.disabled=true;
+     if(j===q.a)b.classList.add("correct");
+     if(selected===j && !correct)b.classList.add("wrong");
+   });
+ }else document.getElementById("fillAnswer").disabled=true;
+ const f=document.getElementById("feedback");
+ f.className="feedback "+(correct?"ok":"no");
+ const right=q.type==="fill"?q.answer:q.options[q.a];
+ f.innerHTML=correct?`أحسنت! إجابة صحيحة ⭐<br>حصلت على نقطة.`:`إجابة غير صحيحة ❌<br>الإجابة الصحيحة: <b>${right}</b>`;
+ document.getElementById("submitBtn").textContent=(idx===19)?"عرض النتيجة 🏆":"السؤال التالي ➜";
+ document.getElementById("submitBtn").onclick=nextQuestion;
+}
+function nextQuestion(){
+ if(!answered)return;
+ if(idx===19){showResult();return;}
+ idx++; selected=null; renderQuestion();
+}
+function evaluation(p){
+ if(p>=90)return ["ممتاز جدًا 🏆","أداء رائع جدًا! لقد أتقنت محتوى الدرس بصورة مميزة."];
+ if(p>=80)return ["ممتاز 🌟","أحسنت! فهمك للدرس قوي ومميز."];
+ if(p>=70)return ["جيد جدًا 👏","أداء جميل! واصل المراجعة لتصل إلى الدرجة الأعلى."];
+ if(p>=60)return ["جيد 👍","بداية جيدة، ومع قليل من التدريب ستتقدم أكثر."];
+ return ["يحتاج إلى مزيد من التدريب 💪","لا بأس! راجع النص مرة أخرى وحاول اكتشاف مزيد من فوائد شجرة الزيتون."];
+}
+function showResult(){
+ const pct=Math.round(score/20*100), wrong=20-score, ev=evaluation(pct);
+ document.getElementById("screen").innerHTML=`<div class="card result">
+   <div class="olive">🏆🌿</div>
+   <h2>أحسنت يا ${escapeHtml(name)}!</h2>
+   <div class="scoreCircle"><strong>${score}/20</strong></div>
+   <div class="stats">
+     <div class="stat"><b>${score}</b>إجابة صحيحة</div>
+     <div class="stat"><b>${wrong}</b>إجابة خاطئة</div>
+     <div class="stat"><b>${pct}%</b>النسبة المئوية</div>
+   </div>
+   <div class="message">${ev[0]}<br><span style="font-size:16px;color:var(--muted)">${ev[1]}</span></div>
+   ${pct>=50?certificate(pct):""}
+   <div class="actions">
+     ${pct>=50?'<button class="secondary" onclick="printCertificate()">🖨️ طباعة الشهادة</button>':""}
+     <button class="primary" style="max-width:260px;margin-top:0" onclick="renderWelcome()">↺ بدء لعبة جديدة</button>
+   </div>
+ </div>`;
+}
+function certificate(pct){
+ return `<div class="certificate" id="certificate">
+   <div class="certTitle">شهادة إنجاز</div>
+   <div style="margin-top:8px">تُمنح إلى</div>
+   <div class="certName">${escapeHtml(name)}</div>
+   <div class="certLine">لإتمامه/إتمامها لعبة درس <b>«يا رمز العطاء والصمود»</b></div>
+   <div class="certLine">الدرجة: <b>${score} من 20</b> &nbsp; | &nbsp; النسبة: <b>${pct}%</b></div>
+    <div class="certLine"><b>مدرسة الأمل</b> • المعلمة <b>ميسون مطر</b></div>
+   <div class="certLine" style="margin-top:10px;color:#397a4a;font-weight:800">🌿 بالعلم والعمل والصمود نصنع الأمل 🌿</div>
+ </div>`;
+}
+function printCertificate(){
+ const cert=document.getElementById("certificate");
+ if(!cert)return;
+ const w=window.open("","_blank");
+ w.document.write(`<html lang="ar" dir="rtl"><head><title>شهادة إنجاز</title><style>
+ body{font-family:Tahoma,Arial,sans-serif;padding:40px;text-align:center;background:#fff}
+ .certificate{margin:auto;max-width:720px;padding:55px;border:8px double #caa847;background:#fffdf4}
+ .certTitle{font-size:36px;color:#8a6a1d;font-weight:900}.certName{font-size:32px;color:#397a4a;font-weight:900;margin:22px}
+ .certLine{font-size:19px;line-height:2.1}
+ </style></head><body>${cert.outerHTML}</body></html>`);
+ w.document.close(); w.focus(); setTimeout(()=>w.print(),300);
+}
+
+function shareGame(){
+  const url = window.location.href;
+  const title = "لعبة يا رمز العطاء والصمود | مدرسة الأمل";
+  const text = "لعبة تعليمية تفاعلية لدرس يا رمز العطاء والصمود من إعداد المعلمة ميسون مطر - مدرسة الأمل.";
+  if(navigator.share){
+    navigator.share({title, text, url}).catch(()=>{});
+  }else{
+    const fb = "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(url);
+    window.open(fb, "_blank", "noopener,noreferrer");
+  }
+}
+
+function escapeHtml(s){return s.replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[m]));}
+renderWelcome();
+</script>
+</body>
+</html>
